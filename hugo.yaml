@@ -1,0 +1,77 @@
+baseURL: /
+locale: en-US
+title: xchern
+theme: PaperMod
+timeZone: Asia/Shanghai
+enableRobotsTXT: true
+
+pagination:
+  pagerSize: 10
+
+outputs:
+  home:
+    - HTML
+    - RSS
+  section:
+    - HTML
+  page:
+    - HTML
+
+menus:
+  main:
+    - name: Blog
+      pageRef: /blog
+      weight: 10
+    - name: About
+      pageRef: /about
+      weight: 20
+
+params:
+  env: production
+  description: Personal website of xchern
+  author: xchern
+  defaultTheme: light
+  disableThemeToggle: true
+  disableSpecial1stPost: true
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
+  profileMode:
+    enabled: true
+    title: xchern
+    subtitle: Personal website.
+    imageUrl: ""
+    imageTitle: ""
+  assets:
+    disableHLJS: false
+    customCSS:
+      - css/extended/custom.css
+  cover:
+    hiddenInList: true
+    hiddenInSingle: true
+  label:
+    text: xchern
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+
+permalinks:
+  blog: /blog/:slug/
+
+taxonomies: {}
+
+security:
+  funcs:
+    getenv:
+      - '^SITE_BASE_URL$'

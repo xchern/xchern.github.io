@@ -1,0 +1,10 @@
+{{- $baseURL := getenv "SITE_BASE_URL" | default site.BaseURL -}}
+{{- $pages := slice site.Home -}}
+{{- $pages = $pages | append site.Sections -}}
+{{- $pages = $pages | append site.RegularPages -}}
+{{ "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range $pages }}
+  <url><loc>{{ urls.JoinPath $baseURL .RelPermalink }}</loc></url>
+  {{- end }}
+</urlset>
