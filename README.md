@@ -1,31 +1,15 @@
 # xchern's website
 
-A Hugo site using the PaperMod theme. Hugo builds locally; no GitHub Actions workflow is used. Source lives on `main`; the generated site is published to the root of `gh-pages` and is not stored in the source branch.
-
-## Setup
-
-Requirements: Hugo (extended edition recommended), Git, and rsync.
-
-```sh
-git clone --recurse-submodules <repository-url>
-cd <repository-directory>
-```
-
-If the repository was cloned without submodules:
-
-```sh
-git submodule update --init --recursive
-```
-
-Set `SITE_BASE_URL` in your shell environment to the site's canonical base URL. Keep that value outside the repository. The build uses it for absolute URLs in metadata and the sitemap.
+Hugo + PaperMod. Source is on `main`; GitHub Actions builds and deploys to GitHub Pages using [Hugo's official workflow](https://gohugo.io/host-and-deploy/host-on-github-pages/), adapted to this site.
 
 ## Local preview
 
-```sh
-SITE_BASE_URL="$SITE_BASE_URL" hugo server -D
-```
+Install Hugo (CI uses 0.169.0), then run:
 
-Open the local URL printed by Hugo. Draft posts are visible in preview; the sitemap continues to use the canonical site URL.
+```sh
+git submodule update --init --recursive
+hugo server -D
+```
 
 ## Write a post
 
@@ -33,28 +17,10 @@ Open the local URL printed by Hugo. Draft posts are visible in preview; the site
 hugo new content blog/my-post/index.md
 ```
 
-Posts are page bundles under `content/blog/`. New posts are drafts by default. Set `draft: false` and choose a publication date when ready. Add images beside `index.md` and refer to them with relative paths.
+Keep images beside `index.md`. Set the date and `draft: false` when ready.
 
 ## Publish
 
-Make sure the working tree contains only the site changes you intend to publish, then run from `main`:
+Commit your changes and push `main`. See **Actions → Build and deploy** for status. Pages must use **GitHub Actions** as its source.
 
-```sh
-./scripts/publish.sh "Publish my post"
-```
-
-The script builds to a temporary directory, commits source changes to `main`, and pushes the generated site to the root of `gh-pages`. It checks remote state and refuses to overwrite source changes it has not fetched. Rerun it after syncing if the remote has advanced.
-
-Configure GitHub Pages once in repository settings: **Deploy from a branch**, branch `gh-pages`, folder `/` (root). GitHub Pages hosts the static branch; repository Actions workflows are not used.
-
-## Structure
-
-- `content/blog/`: articles
-- `content/about.md`: biography
-- `hugo.yaml`: site and theme configuration
-- `assets/css/extended/custom.css`: optional site-specific styles
-- `themes/PaperMod/`: PaperMod Git submodule
-- `static/`: static resources, including the social icons
-- `layouts/`: local Hugo template overrides
-
-The `main` branch contains source only. Do not commit Hugo's generated output; the publish script sends it to `gh-pages`.
+Workflow: `.github/workflows/hugo.yaml`. No publish script or generated-site branch is needed.

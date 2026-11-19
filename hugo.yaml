@@ -80,6 +80,10 @@ permalinks:
 
 taxonomies: {}
 
+caches:
+  images:
+    dir: :cacheDir/images
+
 security:
   funcs:
     getenv:
