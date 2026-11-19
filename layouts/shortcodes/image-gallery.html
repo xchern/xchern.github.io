@@ -1,0 +1,16 @@
+<div class="image-gallery" role="region" aria-label="图片画廊" tabindex="0">
+  {{- range .Params }}
+    {{- $parts := split . "|" }}
+    {{- $image := $.Page.Resources.GetMatch (index $parts 0) }}
+    {{- $caption := index $parts 1 }}
+    {{- with $image }}
+      {{- $thumbnail := .Resize "360x" }}
+      <figure>
+        <a href="{{ .RelPermalink }}" aria-label="查看原图：{{ $caption }}">
+          <img src="{{ $thumbnail.RelPermalink }}" alt="{{ $caption }}" width="{{ $thumbnail.Width }}" height="{{ $thumbnail.Height }}" loading="lazy">
+        </a>
+        <figcaption>{{ $caption }}</figcaption>
+      </figure>
+    {{- end }}
+  {{- end }}
+</div>
