@@ -34,6 +34,7 @@ params:
   disableThemeToggle: true
   disableSpecial1stPost: true
   ShowReadingTime: true
+  comments: true
   ShowShareButtons: false
   ShowPostNavLinks: true
   ShowBreadCrumbs: false

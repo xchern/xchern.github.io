@@ -1,0 +1,5 @@
+{{- if and (not hugo.IsServer) .IsPage (eq .Section "blog") }}
+<div class="post-meta">
+  <span id="busuanzi_container_page_pv" style="display: none;">本文阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+</div>
+{{- end }}
